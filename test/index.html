@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Сторінка суто технічна: не індексуємо і ховаємо від пошуковиків -->
+  <meta name="robots" content="noindex,nofollow">
+  <title>&nbsp;</title>
+  <!-- Фон під колір головної, щоб навіть теоретичного "мигання" не було видно -->
+  <style>html,body{margin:0;height:100%;background:#F7EFE1;overflow:hidden}</style>
+
+  <!--
+    ГОЛОВНИЙ СКРИПТ РЕДИРЕКТА.
+    Стоїть у <head> і виконується СИНХРОННО, ще до рендера <body>,
+    тому користувач фізично не встигає побачити цю сторінку.
+  -->
+  <script>
+  (function () {
+    'use strict';
+
+    /* ================= НАЛАШТУВАННЯ ================= */
+    var HOME      = '/';         // головна сторінка домену
+    var POPUP_URL = '/?exit=1';  // головна + параметр, який відкриє попап/форму
+    var STAGE_KEY = '__exit_stage';
+
+    /* ===== Надійне сховище етапу =====
+       Пишемо одночасно в sessionStorage і window.name.
+       window.name переживає переходи між сторінками в межах вкладки
+       і працює навіть там, де sessionStorage заблоковано (приватний режим тощо). */
+    function readStage() {
+      try {
+        var s = sessionStorage.getItem(STAGE_KEY);
+        if (s !== null) return s;
+      } catch (e) {}
+      var m = /__exit_stage:([a-z]+)/.exec(window.name || '');
+      return m ? m[1] : null;
+    }
+    function writeStage(v) {
+      try { sessionStorage.setItem(STAGE_KEY, v); } catch (e) {}
+      var base = (window.name || '').replace(/__exit_stage:[a-z]+/g, '');
+      window.name = base + '__exit_stage:' + v;
+    }
+
+    function go(url, replace) {
+      if (replace) location.replace(url);
+      else location.assign(url); // assign лишає /test у історії -> "Назад" поверне сюди
+    }
+
+    function run() {
+      var stage = readStage();
+
+      if (stage === null) {
+        // 1) ПЕРШИЙ ВХІД. Створюємо запис /test в історії та йдемо на головну.
+        //    Тепер натискання "Назад" з головної поверне користувача сюди.
+        writeStage('seeded');
+        go(HOME, false); // push
+      } else if (stage === 'seeded') {
+        // 2) ПОВЕРНУЛИСЯ НАЗАД УПЕРШЕ. Відкриваємо головну з попапом.
+        //    replace() прибирає /test з історії -> наступне "Назад" уже випустить із сайту.
+        writeStage('popup');
+        go(POPUP_URL, true); // replace
+      } else {
+        // 3) Захист від зациклення (етап уже пройдено) — просто на головну.
+        go(HOME, true);
+      }
+    }
+
+    // Виконуємо негайно.
+    run();
+
+    // Якщо сторінку відновлено з bfcache (кнопки назад/вперед не перезавантажують JS) —
+    // повторюємо логіку, інакше користувач застряг би на порожній /test.
+    window.addEventListener('pageshow', function (e) {
+      if (e.persisted) run();
+    });
+  })();
+  </script>
+
+  <!-- Резерв, якщо JS вимкнено: просто відправляємо на головну, щоб не застрягти тут -->
+  <noscript><meta http-equiv="refresh" content="0;url=/"></noscript>
+</head>
+<body></body>
+</html>

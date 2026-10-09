@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-64BSEHG4V4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-64BSEHG4V4');
+</script>
+<script>
+  gtag('event', 'purchase', {
+    transaction_id: 'T04343',   
+    value: 29.00,
+    currency: 'EUR',
+    items: [
+      {
+        item_id: '29',   
+        item_name: '29', 
+        price: 29.00,
+        quantity: 1
+      }
+    ]
+  });
+</script>
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Special 1 Year Access</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Source+Sans+3:wght@400;500;600;900&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="images/n1.webp">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* 1u = 1px on a 428px-wide screen, scales down proportionally on narrower ones */
+      --u: min(1px, calc(100vw / 428));
+      --red: #FF453A;
+      --dark: #1C1C1C;
+    }
+
+    html, body {
+      background: #FFF5EF;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      color: #000;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .page {
+      position: relative;
+      width: calc(428 * var(--u));
+      height: calc(926 * var(--u));
+      margin: 0 auto;
+      overflow: hidden;
+      background: linear-gradient(180deg, #fff 0%, #FFF5EF 100%);
+    }
+
+    /* ---------- Hero images ---------- */
+    .hero-cards {
+      position: absolute;
+      top: calc(151.83 * var(--u));
+      left: 0;
+      width: calc(428 * var(--u));
+      height: calc(596 * var(--u));
+      -webkit-mask-image: linear-gradient(180deg, transparent 15%, #000 32%, #000 66%, transparent 92%);
+              mask-image: linear-gradient(180deg, transparent 15%, #000 32%, #000 66%, transparent 92%);
+    }
+    .hero-girl {
+        z-index: 2;
+      position: absolute;
+      top: calc(267 * var(--u));
+      left: calc(25 * var(--u));
+      width: calc(355 * var(--u));
+      height: calc(363 * var(--u));
+    }
+
+    /* ---------- Thank you card ---------- */
+    .thanks {
+      position: absolute;
+      top: calc(40 * var(--u));
+      left: calc(24 * var(--u));
+      right: calc(24 * var(--u));
+      padding: calc(8 * var(--u)) calc(10 * var(--u));
+      background: #fff;
+      border-radius: calc(20 * var(--u));
+      box-shadow: 0 calc(4 * var(--u)) calc(8 * var(--u)) rgba(0, 0, 0, .15);
+      text-align: center;
+    }
+    .thanks__title {
+      font-size: calc(22 * var(--u));
+      font-weight: 900;
+      line-height: calc(28 * var(--u));
+      text-transform: uppercase;
+    }
+    .thanks__text {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: calc(8 * var(--u));
+      font-size: calc(16 * var(--u));
+      line-height: calc(24 * var(--u));
+      color: rgba(0, 0, 0, .6);
+    }
+    .thanks__text img {
+      width: calc(21.5 * var(--u));
+      height: calc(14.5 * var(--u));
+    }
+
+    /* ---------- Black strip ---------- */
+    .strip {
+      position: absolute;
+      top: calc(125 * var(--u));
+      left: 0;
+      right: 0;
+      height: calc(30 * var(--u));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: calc(10 * var(--u));
+      background: #000;
+      color: #fff;
+      font-size: calc(14 * var(--u));
+      text-transform: uppercase;
+    }
+    .strip img {
+      width: calc(14 * var(--u));
+      height: calc(14 * var(--u));
+    }
+
+    /* ---------- Headline ---------- */
+    .headline {
+      position: absolute;
+      top: calc(169 * var(--u));
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-family: 'Anton', sans-serif;
+      font-weight: 400;
+      font-size: calc(55.28 * var(--u));
+      line-height: calc(59.36 * var(--u));
+      color: var(--red);
+      text-transform: uppercase;
+    }
+    .sparkle-l {
+      position: absolute;
+      left: calc(14 * var(--u));
+      top: calc(202 * var(--u));
+      width: calc(23 * var(--u));
+      height: calc(23 * var(--u));
+    }
+    .sparkle-r {
+      position: absolute;
+      left: calc(382 * var(--u));
+      top: calc(186 * var(--u));
+      width: calc(32 * var(--u));
+      height: calc(39 * var(--u));
+    }
+
+    /* ---------- Bottom block ---------- */
+    .offer {
+      position: absolute;
+      top: calc(580 * var(--u));
+      left: 0;
+      right: 0;
+      z-index: 9;
+      padding: 0 calc(24 * var(--u)) calc(30 * var(--u));
+      display: flex;
+      flex-direction: column;
+      gap: calc(18 * var(--u));
+    }
+
+    /* price */
+    .price {
+      position: relative;
+      display: block;
+      height: calc(104 * var(--u));
+    }
+    .price__was {
+      position: absolute;
+      top: 0;
+      left: calc(55 * var(--u));
+      width: calc(325 * var(--u));
+      height: calc(104 * var(--u));
+      padding: 0 calc(27 * var(--u));
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      background: var(--dark);
+      border-radius: calc(12 * var(--u));
+    }
+    .price__was-inner {
+      width: calc(82 * var(--u));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: calc(14 * var(--u));
+    }
+    .price__was-label {
+      font-size: calc(14 * var(--u));
+      font-weight: 500;
+      line-height: 1;
+      color: #747474;
+      text-transform: uppercase;
+    }
+    .price__was-old {
+      position: relative;
+      font-family: 'Anton', sans-serif;
+      font-size: calc(34 * var(--u));
+      line-height: calc(36 * var(--u));
+      color: #4A4A4A;
+    }
+    .price__was-old svg {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: calc(82 * var(--u));
+      height: calc(34 * var(--u));
+      transform: translate(-50%, -50%);
+      overflow: visible;
+    }
+    .price__now {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: calc(247 * var(--u));
+      height: calc(104 * var(--u));
+      padding: calc(20 * var(--u)) calc(12 * var(--u));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: calc(14 * var(--u));
+      background: var(--red);
+      border-radius: calc(12 * var(--u));
+    }
+    .price__badge {
+      align-self: stretch;
+      height: calc(23 * var(--u));
+      padding: 0 calc(27 * var(--u));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+      border-radius: calc(82 * var(--u));
+      color: #fff;
+      font-size: calc(14 * var(--u));
+      font-weight: 500;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .price__value {
+      font-family: 'Anton', sans-serif;
+      font-size: calc(34 * var(--u));
+      line-height: calc(27 * var(--u));
+      color: #fff;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .deal {
+      font-family: 'Anton', sans-serif;
+      font-size: calc(33.2 * var(--u));
+      line-height: calc(40 * var(--u));
+      color: var(--red);
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    /* CTA */
+    .cta-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: calc(4 * var(--u));
+    }
+    .cta {
+      height: calc(56 * var(--u));
+      padding: 0 calc(32 * var(--u));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: calc(10 * var(--u));
+      background: #000;
+      border-radius: calc(64 * var(--u));
+      color: #fff;
+      font-family: 'Anton', sans-serif;
+      font-size: calc(27 * var(--u));
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: transform .15s ease;
+      animation: cta-pulse 1.8s ease-in-out infinite;
+    }
+    .cta:active { animation: none; transform: scale(.98); }
+    .cta svg {
+      width: calc(17 * var(--u));
+      height: calc(14 * var(--u));
+      flex-shrink: 0;
+    }
+    @keyframes cta-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cta { animation: none; }
+    }
+    .cta-note {
+      text-align: center;
+      font-size: calc(16 * var(--u));
+      font-weight: 600;
+      line-height: calc(23 * var(--u));
+    }
+
+    /* features */
+    .features {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: calc(8 * var(--u));
+      color: var(--dark);
+      font-size: calc(13 * var(--u));
+      font-weight: 600;
+      line-height: calc(14 * var(--u));
+    }
+    .feature img {
+      width: calc(35 * var(--u));
+      height: calc(35 * var(--u));
+      flex-shrink: 0;
+    }
+    .features__sep {
+      width: 1px;
+      height: calc(35 * var(--u));
+      background: rgba(255, 69, 58, .25);
+    }
+  </style>
+
+
+<meta name="facebook-domain-verification" content="p7zouo59z8jqiuui834zld0821gn4q" />
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1006799992124486');
+fbq('track', 'Lead');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1006799992124486&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+ 
+</head>
+<body>
+  <main class="page">
+
+    <img class="hero-cards" src="images/n2.webp" alt="">
+    <img class="hero-girl" src="images/n1.webp" alt="">
+
+    <div class="thanks">
+      <h1 class="thanks__title">Thank you for your purchase!</h1>
+      <p class="thanks__text">
+        <img src="images/im5.webp" alt="">
+        Access to your program was sent to your email
+      </p>
+    </div>
+
+    <div class="strip">
+      Grab your one-time offer after purchase
+      <img src="images/im8.webp" alt="">
+    </div>
+
+    <h2 class="headline">Special 1 year<br>access for you!</h2>
+    <img class="sparkle-l" src="images/im7.webp" alt="">
+    <img class="sparkle-r" src="images/im6.webp" alt="">
+
+    <section class="offer">
+      <a href="https://mmoschool.online/shop/item/13500" class="price">
+        <div class="price__was">
+          <div class="price__was-inner">
+            <span class="price__was-label">was</span>
+            <span class="price__was-old">
+              348€
+              <svg viewBox="0 0 82 34" preserveAspectRatio="none" aria-hidden="true">
+                <line x1="1" y1="33" x2="81" y2="1" stroke="#FF453A" stroke-width="2"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+        <div class="price__now">
+          <span class="price__badge">Unlock 1 Year Access 🔥</span>
+          <span class="price__value">Just for 145€</span>
+        </div>
+      </a>
+
+      <p class="deal">12 months for the price of 5</p>
+
+      <div class="cta-wrap">
+        <a href="https://mmoschool.online/shop/item/13500" class="cta">
+          Switch to annual &amp; save
+          <svg viewBox="0 0 17 14" fill="none" aria-hidden="true">
+            <path d="M1 7h14M9.5 1.5 15 7l-5.5 5.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <p class="cta-note">Your goals can change. Your access stays</p>
+      </div>
+
+      <div class="features">
+        <div class="feature">
+          <img src="images/im4.webp" alt="">
+          <span>All Programs<br>&amp; Updates</span>
+        </div>
+        <span class="features__sep"></span>
+        <div class="feature">
+          <img src="images/im3.webp" alt="">
+          <span>Community<br>Access</span>
+        </div>
+        <span class="features__sep"></span>
+        <div class="feature">
+          <img src="images/im2.webp" alt="">
+          <span>Full Bonuses<br>Library</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>

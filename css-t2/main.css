@@ -1,0 +1,4086 @@
+/* Глобальний контейнер екрану */
+.s1 {
+  width: 428px;
+  height: 819px;
+  position: relative;
+  background: #ffffff;
+  overflow: hidden;
+  font-family: 'Source Sans 3', sans-serif;
+}
+
+/* --- Заголовок --- */
+.s1-header {
+  position: absolute;
+  width: 377px;
+  left: 25px;
+  top: 47px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 11.5px;
+  z-index: 10;
+}
+.s1-title {
+  color: #242424;
+  font-size: 54px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  line-height: 56.7px;
+  letter-spacing: 0.54px;
+  text-align: center;
+  margin: 0;
+  text-transform: uppercase;
+}
+.s1-title-red {
+  color: #F83A4F;
+}
+.s1-description {
+  width: 100%;
+  color: black;
+  font-size: 20px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  line-height: 19px;
+  letter-spacing: 0.2px;
+  text-align: center;
+}
+
+/* --- Плашка з датою --- */
+.s1-date-pill {
+  position: absolute;
+  width: 201px;
+  height: 43px;
+  left: 113px;
+  top: 203px;
+  padding: 0 12px;
+  background: #ffffff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  outline: 1px solid #EF3145;
+  outline-offset: -1px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  z-index: 10;
+}
+.s1-date-icon {
+  width: 14.5px;
+  height: 15px;
+  object-fit: contain;
+}
+.s1-date-pill span {
+  color: black;
+  font-size: 16px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+
+/* --- 3D Карусель: Точна увігнута проекція з відсіканням невидимих зон --- */
+.s1-carousel-wrap {
+  position: absolute;
+  width: 428px;
+  height: 175px;
+  left: 0;
+  top: 243px;
+  perspective: 800px;
+  z-index: 1;
+}
+.s1-carousel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  /* Змінено: linear для рівномірного руху, 30s - швидкість повного кола (можна змінювати) */
+  animation: s1-swipe-concave 30s infinite linear;
+}
+
+.s1-card {
+  position: absolute;
+  width: 95px;
+  height: 146px;
+  left: 168px; /* (428 - 92) / 2 */
+  top: 0;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  /* translateZ(-260px) відштовхує картки назад, формуючи чашу */
+  transform: rotateY(calc(-22.5deg * var(--i))) translateZ(-260px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  -webkit-box-reflect: below 5px linear-gradient(transparent 50%, rgba(0,0,0,0.2));
+
+  /* КРИТИЧНЕ ПРАВИЛО: Приховує картки, які йдуть по передній частині кола */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+@keyframes s1-swipe-concave {
+  /* Плавний, безперервний оберт на 360 градусів для ідеального зациклення */
+  0% { transform: translateZ(200px) rotateY(0deg); }
+  100% { transform: translateZ(200px) rotateY(360deg); }
+}
+/* --- Ціновий бейдж --- */
+.s1-price-badge {
+  position: absolute;
+  width: 145.03px;
+  height: 145.03px;
+  left: -18px;
+  top: 353.82px;
+  border-radius: 100%;
+  transform: rotate(-8deg);
+  transform-origin: top left;
+  z-index: 2;
+}
+
+/* --- Головне фото жінки --- */
+.s1-main-img {
+  position: absolute;
+  width: 520px;
+  height: 377px;
+  left: -6px;
+  top: 285px;
+  z-index: 3;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* --- Біла підкладка знизу (для перекриття килимка) --- */
+.s1-bottom-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 196px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #ffffff 4%, #ffffff 100%);
+  z-index: 4;
+}
+
+/* --- Нижній блок (Контент) --- */
+.s1-bottom-panel {
+  position: absolute;
+  width: 428px;
+  left: 0;
+  top: 624px;
+  padding: 0 24px 40px 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  z-index: 10;
+}
+
+/* Переваги (Benefits) */
+.s1-benefits-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 20px;
+}
+.s1-benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: black;
+  font-size: 14px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  line-height: 15px;
+  white-space: nowrap;
+}
+.s1-benefit-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.s1-action-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 17px;
+  width: 100%;
+}
+
+/* Картка із закликом (Action Card) */
+.s1-action-card {
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow: 0px 4.51px 18.04px rgba(0, 0, 0, 0.10);
+  border-radius: 40.59px;
+  padding: 14px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 17px;
+  box-sizing: border-box;
+}
+.s1-action-text {
+  width: 121px;
+  color: black;
+  font-size: 14px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  line-height: 19px;
+}
+.s1-action-text strong {
+  font-weight: 700;
+}
+.s1-action-btn {
+  width: 220px;
+  height: 52px;
+  flex-shrink: 0;
+  background: linear-gradient(163deg, #F83A4F 0%, #FA4B5D 100%);
+  border-radius: 100px;
+  color: white;
+  font-size: 18.05px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+  line-height: 24.34px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Блок довіри (Trust Row) */
+.s1-trust-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.s1-trust-img {
+  width: 380px;
+  height: 25.5px;
+  object-fit: contain;
+}
+
+
+
+
+
+
+
+
+/* --- Оверлей модалки --- */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+
+/* --- Контейнер (строго за вашими розмірами) --- */
+.modal-wrapper {
+  width: 380px;
+  height: 613px;
+  position: relative;
+  box-shadow: 0px 15px 45px rgba(0, 0, 0, 0.45);
+  transform: translateY(50px);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.modal-overlay.active .modal-wrapper {
+  transform: translateY(0);
+}
+
+.modal-inner {
+  width: 380px;
+  height: 613px;
+  position: absolute;
+  left: 0; top: 0;
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+/* Кнопка закриття */
+.modal-close {
+  width: 38px;
+  height: 38px;
+  position: absolute;
+  left: 348px; 
+  top: -6px;
+  background: #E2E2E2;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: 0.2s;
+}
+.modal-close:hover {
+  background: #d0d0d0;
+}
+
+/* --- Верхня частина --- */
+.modal-top {
+  width: 332px;
+  position: absolute;
+  left: 24px; 
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.modal-title-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.modal-title-red {
+  color: #F83A4F;
+  font-size: 35px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.1;
+}
+.modal-title-black {
+  color: black;
+  font-size: 18px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 900;
+  line-height: 36px;
+  letter-spacing: 1.44px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.modal-marquee {
+  width: 380px;
+  height: 38px;
+  position: relative;
+  margin-left: -24px; /* Компенсуємо відступ батьківського блоку */
+}
+
+/* --- Swiper Слайдер --- */
+.modal-swiper {
+  width: 380px;
+  height: 396px;
+  position: absolute;
+  left: 0; 
+  top: 151px;
+  overflow: hidden;
+}
+
+.modal-swiper .swiper-wrapper {
+  align-items: center; 
+}
+
+/* Базовий слайд (Ширина фіксована для точної математики Swiper) */
+.modal-slide {
+  width: 224px !important;
+  height: 348px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+/* Внутрішня картка (Зменшена для неактивних слайдів) */
+.modal-card-inner {
+  width: 224px;
+  height: 348px;
+  border-radius: 21.31px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #CCCCCC;
+  background: white;
+  /* 0.564 - це рівно 126.32px / 224px, що ідеально повторює ваші розміри */
+  transform: scale(0.564);
+  transition: all 0.4s ease;
+  box-sizing: border-box;
+}
+
+/* Активна картка збільшується до 100% */
+.swiper-slide-active .modal-card-inner {
+  transform: scale(1);
+  outline: 1px solid #CCCCCC;
+  outline-offset: -1px;
+  border: none;
+}
+
+/* Картинка фону */
+.modal-cover-img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+
+.swiper-slide-active .modal-blur-bg {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Контент поверх блюру */
+.modal-content-wrap {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: #ffffff50;
+  backdrop-filter: blur(15px);
+  padding: 14px;
+  box-sizing: border-box;
+  z-index: 3;
+  border-radius: 22px;
+  
+  display: flex;
+  flex-direction: column;
+  
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+.swiper-slide-active .modal-content-wrap {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Типографіка всередині картки */
+.modal-back-header {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.modal-back-title {
+  color: black; font-size: 18px; font-family: 'Source Sans 3', sans-serif; font-weight: 700; text-transform: uppercase; line-height: 20px;
+}
+.modal-back-subtitle {
+  color: black; font-size: 14px; font-family: 'Source Sans 3', sans-serif; font-weight: 400; line-height: 1.3; padding-bottom: 7px;
+}
+.modal-features {
+  display: flex; flex-direction: column; gap: 8px; padding: 10px 0;
+}
+.modal-feature {
+  display: flex; align-items: center; gap: 8px;
+}
+.modal-f-icon-wrap {
+  width: 24px; height: 24px; background: rgba(0, 0, 0, 0.05); border-radius: 50%; display: flex; justify-content: center; align-items: center; flex-shrink: 0;
+}
+.modal-f-icon {
+  width: 16px; height: 16px; object-fit: contain;
+}
+.modal-feature span { 
+  color: black; font-size: 16px; font-family: 'Source Sans 3', sans-serif; font-weight: 400; line-height: 120%;
+}
+.modal-for-you {
+  margin-top: 8px; color: black; font-size: 14px; font-family: 'Source Sans 3', sans-serif; line-height: 1.4;
+}
+.modal-for-you strong {
+  font-weight: 700;
+}
+
+/* --- Навігація в модалці --- */
+.modal-nav {
+  width: 332px;
+  height: 42px;
+  position: absolute;
+  left: 24px;
+  top: 547px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+.modal-btn-prev, .modal-btn-next {
+  width: 160px; /* З вашого коду padding-left/right: 50px */
+  height: 42px;
+  background: linear-gradient(178deg, #ED1F35 0%, #F7596A 100%);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.modal-btn-prev:active, .modal-btn-next:active {
+  opacity: 0.8;
+}
+.modal-btn-prev img, .modal-btn-next img {
+  height: 18px;
+  object-fit: contain;
+}
+
+/* Тема: Темна картинка (Білий текст) */
+.text-dark-theme .modal-back-title,
+.text-dark-theme .modal-back-subtitle,
+.text-dark-theme .modal-feature span,
+.text-dark-theme .modal-for-you {
+  color: white !important;
+}
+
+/* Тема: Світла картинка (Чорний текст) */
+.text-light-theme .modal-back-title,
+.text-light-theme .modal-back-subtitle,
+.text-light-theme .modal-feature span,
+.text-light-theme .modal-for-you {
+  color: black !important;
+}
+
+@media (max-width: 440px) {
+  /* --- Оверлей модалки --- */
+  .modal-overlay {
+    backdrop-filter: blur(1.17vw);
+  }
+
+  /* --- Контейнер --- */
+  .modal-wrapper {
+    width: 88.79vw;
+    height: 143.22vw;
+    box-shadow: 0vw 3.5vw 10.51vw rgba(0, 0, 0, 0.45);
+    transform: translateY(11.68vw);
+  }
+  .modal-overlay.active .modal-wrapper {
+    transform: translateY(0);
+  }
+
+  .modal-inner {
+    width: 88.79vw;
+    height: 143.22vw;
+    border-radius: 5.61vw;
+  }
+
+  /* Кнопка закриття */
+  .modal-close {
+    width: 8.88vw;
+    height: 8.88vw;
+    left: 81.31vw; 
+    top: -1.4vw;
+  }
+  .modal-close svg {
+    width: 3vw;
+    height: 3vw;
+  }
+
+  /* --- Верхня частина --- */
+  .modal-top {
+    width: 77.57vw;
+    left: 5.61vw; 
+    top: 5.61vw;
+    gap: 3.27vw;
+  }
+  .modal-title-red {
+    font-size: 8.18vw;
+  }
+  .modal-title-black {
+    font-size: 4.21vw;
+    line-height: 8.41vw;
+    letter-spacing: 0.34vw;
+  }
+  .modal-marquee {
+    width: 88.79vw;
+    height: 8.88vw;
+    margin-left: -5.61vw;
+  }
+
+  /* --- Swiper Слайдер --- */
+  .modal-swiper {
+    width: 88.79vw;
+    height: 92.52vw;
+    top: 35.28vw;
+  }
+
+  /* Базовий слайд */
+  .modal-slide {
+    width: 52.34vw !important;
+    height: 81.31vw !important;
+    border-radius: 2.8vw !important;
+  }
+
+  /* Внутрішня картка */
+  .modal-card-inner {
+    width: 52.34vw;
+    height: 81.31vw;
+    border-radius: 4.98vw;
+  }
+
+  /* Контент поверх блюру */
+  .modal-content-wrap {
+    padding: 3.27vw;
+    border-radius: 5.14vw;
+  }
+
+  /* Типографіка всередині картки */
+  .modal-back-header {
+    gap: 0.93vw;
+  }
+  .modal-back-title {
+    font-size: 4.21vw;
+    line-height: 4.67vw;
+  }
+  .modal-back-subtitle {
+    font-size: 3.27vw;
+    padding-bottom: 1.64vw;
+  }
+  .modal-features {
+    gap: 1.87vw;
+    padding: 2.34vw 0;
+  }
+  .modal-feature {
+    gap: 1.87vw;
+  }
+  .modal-f-icon-wrap {
+    width: 5.61vw;
+    height: 5.61vw;
+  }
+  .modal-f-icon {
+    width: 3.74vw;
+    height: 3.74vw;
+  }
+  .modal-feature span { 
+    font-size: 3.74vw;
+  }
+  .modal-for-you {
+    margin-top: 1.87vw;
+    font-size: 3.27vw;
+  }
+
+  /* Лінії всередині картки (SVG) */
+  .modal-content-wrap svg {
+    width: 100%;
+    height: auto;
+  }
+
+  /* --- Навігація в модалці --- */
+  .modal-nav {
+    width: 77.57vw;
+    height: 9.81vw;
+    left: 5.61vw;
+    top: 127.8vw;
+    gap: 3.27vw;
+  }
+  .modal-btn-prev, .modal-btn-next {
+    width: 37.38vw; 
+    height: 9.81vw;
+    border-radius: 2.8vw;
+  }
+  .modal-btn-prev img, .modal-btn-next img {
+    height: 4.21vw;
+  }
+}
+
+
+/* Глобальний контейнер блоку 2 */
+.s2 {
+  width: 428px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 45px 24px;
+  gap: 32px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* --- Плашка-питання (s2, s4, st8) --- */
+.q-pill {
+  width: 380px;
+  height: 38px;
+  flex-shrink: 0;
+  background: white;
+  box-shadow: 0px 8px 15.8px rgba(0, 0, 0, 0.09);
+  border-radius: 1000px;
+  outline: 1px solid #F83A4F;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+}
+.q-pill-icon {
+  width: 24.5px;
+  height: 21.5px;
+  flex-shrink: 0;
+}
+.q-pill-text {
+  color: black;
+  font-size: 16px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+  line-height: 36px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* --- EVERYTHING --- */
+.s2-everything {
+  position: relative;
+  width: 370px;
+  height: 106px;
+  flex-shrink: 0;
+}
+.s2-everything img {
+  position: absolute;
+  left: -40px;
+  top: -23.5px;
+  width: 444px;
+  height: 178.5px;
+  max-width: none;
+  pointer-events: none;
+}
+
+/* --- Текст --- */
+.s2-footer-text {
+  text-align: center;
+  line-height: 23px;
+}
+.s2-fw-400 {
+  color: black;
+  font-size: 16px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+}
+.s2-fw-700 {
+  color: black;
+  font-size: 16px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+}
+
+/* --- Програми по категоріях --- */
+.s2-grid-wrapper {
+  width: 372px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  cursor: pointer;
+}
+.s2-cat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.s2-cat-title {
+  height: 32px;
+  padding: 0 14px;
+  background: linear-gradient(90deg, #FD7382 0%, #F83A4F 100%);
+  border: 2px solid #ffffff;
+  border-radius: 1000px;
+  box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 16px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  line-height: 20px;
+  text-transform: uppercase;
+  box-sizing: border-box;
+}
+.s2-cat-row {
+  display: flex;
+  align-items: center;
+  gap: 10.08px;
+}
+.s2-cat-row img {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 132.49px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* --- Гайди --- */
+.s2-tools {
+  width: 372px;
+  height: 28px;
+  padding: 0 14px;
+  background: #FDEEEF;
+  box-shadow: 0px 4px 7.7px rgba(0, 0, 0, 0.25);
+  border-radius: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #F83A4F;
+  font-size: 16px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+  line-height: 20px;
+  text-transform: uppercase;
+  box-sizing: border-box;
+}
+.s2-guides {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+.s2-guide {
+  width: 121px;
+  padding: 4px 4px 14px 4px;
+  background: white;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 14.05px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  box-sizing: border-box;
+}
+.s2-guide-img {
+  position: relative;
+  width: 113px;
+  height: 136px;
+  flex-shrink: 0;
+}
+.s2-guide-img img {
+  position: absolute;
+  max-width: none;
+}
+.s2-guide-img-1 {
+  left: -6px;
+  top: -9.5px;
+  width: 123.5px;
+  height: 148.5px;
+}
+.s2-guide-img-2 {
+  left: -1px;
+  top: -9px;
+  width: 119px;
+  height: 151.5px;
+}
+.s2-guide-img-3 {
+  left: -4.5px;
+  top: -10.5px;
+  width: 118.5px;
+  height: 151px;
+}
+.s2-guide-text {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4px;
+  text-align: center;
+  color: black;
+  font-size: 14px;
+  font-family: 'Source Sans 3', sans-serif;
+  line-height: 20px;
+}
+.s2-guide-title {
+  font-weight: 700;
+}
+.s2-guide-desc {
+  font-weight: 400;
+}
+
+/* --- Кнопка --- */
+.s2-unlock-group {
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.s2-unlock-btn {
+  width: 380px;
+  height: 87px;
+  padding: 0 20px;
+  background: linear-gradient(90deg, #FD7382 0%, #F83A4F 100%);
+  border-radius: 54px;
+  outline: 2px solid rgba(255, 255, 255, 0.80);
+  outline-offset: -2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 32px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.s2-unlock-text {
+  text-align: center;
+  color: black;
+  font-size: 14px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+/* --- Безкінечний рухомий рядок --- */
+.s2-marquee-container {
+  width: 428px;
+  height: 38px;
+  background: linear-gradient(90deg, #FD7382 0%, #F83A4F 100%);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+.s2-marquee-track {
+  display: flex;
+  width: max-content;
+  /* Анімація триває 12 секунд для повільного плавного руху */
+  animation: s2-scroll-left 12s linear infinite;
+}
+.s2-marquee-group {
+  display: flex;
+  align-items: center;
+}
+.s2-marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 150px;
+}
+.st7 .s2-marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: auto;
+  padding: 0 4px;
+}
+.s2-marquee-item span {
+  color: white;
+  font-size: 15px;
+  
+  font-family: 'Roboto', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@keyframes s2-scroll-left {
+  0% { transform: translateX(0); }
+  /* Зміщуємо рівно на 50% ширини (на одну групу), щоб зациклити ідеально */
+  100% { transform: translateX(-50%); }
+}
+
+
+
+
+
+/* Глобальний контейнер блоку 3 */
+.s3 {
+  width: 428px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 45px 0 0 0;
+  gap: 24px;
+  box-sizing: border-box;
+}
+
+/* --- Заголовок --- */
+.s3-header {
+  text-align: center;
+  width: 100%;
+}
+.s3-title-black {
+  color: #020202;
+  font-size: 40px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  line-height: 47px;
+  text-transform: uppercase;
+}
+.s3-title-red {
+  color: #F83A4F;
+  font-size: 40px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  line-height: 47px;
+  text-transform: uppercase;
+}
+
+/* --- Картки --- */
+.s3-cards {
+  display: flex;
+  gap: 8px;
+}
+.s3-card {
+  width: 121.3px;
+  height: 212px;
+  padding: 14px 4px 14px 8px;
+  background: #FBF2F6;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.s3-card-icon {
+  width: 42px;
+  height: 42px;
+  margin-bottom: 15px;
+}
+.s3-card-title {
+  color: black;
+  font-size: 18px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 900;
+  line-height: 20px;
+  margin-bottom: 4px;
+}
+.s3-card-desc {
+  color: black;
+  font-size: 14px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+/* --- Фото --- */
+.s3-img {
+  display: block;
+  width: 428px;
+  height: 297px;
+  object-fit: cover;
+}
+
+
+
+
+/* Глобальний контейнер блоку */
+.s4 {
+  width: 428px;
+  /* Градієнт та фон як у вашому коді */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 61px 0 45px 0; /* Бокові паддінги перенесені на внутрішні елементи для коректного свайпу */
+  box-sizing: border-box;
+ 
+  position: relative;
+}
+
+/* Заголовки */
+.s4-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 0 24px;
+  margin-bottom: 18px;
+}
+.s4-title-black {
+  color: black;
+  font-size: 40px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  text-align: center;
+  line-height: 47px;
+}
+.s4-title-red {
+  font-size: 24px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  text-align: center;
+  line-height: 28px;
+  background: linear-gradient(90deg, #FD7382 0%, #F83A4F 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Плашка з питанням */
+.s4-question-box {
+  margin-bottom: 32px;
+}
+
+/* Слайдер */
+.s4-swiper {
+  width: 100%;
+  height: 430px;
+  padding-left: 24px !important; /* Відступ зліва, щоб слайдер починався рівно */
+  overflow: visible !important; 
+}
+.s4-slide {
+  width: 286px !important;
+  height: 428px;
+  position: relative;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0px 4px 13.8px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.s4-slide-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Градієнт поверх фото для тексту */
+.s4-slide-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 220px;
+  background: linear-gradient(360deg, #ffffff 30%, rgba(255, 255, 255, 0) 100%);
+  z-index: 1;
+}
+
+/* Текстовий блок картки */
+.s4-slide-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.s4-slide-title {
+  color: #F83A4F;
+  font-size: 20px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+}
+.s4-slide-desc {
+  color: black;
+  font-size: 14px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  line-height: 17px;
+}
+
+/* Контроли (Пагінація та стрілки) */
+.s4-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 24px;
+  box-sizing: border-box;
+  margin-top: 45px;
+  margin-bottom: 58px;
+}
+.s4-pagination {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  position: relative !important;
+  width: auto !important;
+}
+.s4-pagination .swiper-pagination-bullet {
+  width: 8px !important;
+  height: 8px !important;
+  background: transparent !important;
+  border: 1px solid black !important;
+  opacity: 0.5 !important;
+  margin: 0 !important;
+}
+.s4-pagination .swiper-pagination-bullet-active {
+  background: linear-gradient(178deg, #ED1F35 0%, #F7596A 100%) !important;
+  border: none !important;
+  outline: 2px solid rgba(255, 0, 28, 0.36);
+  opacity: 1 !important;
+}
+.s4-nav {
+  display: flex;
+  gap: 14px;
+}
+.s4-nav-btn {
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(178deg, #ED1F35 0%, #F7596A 100%);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+}
+.s4-nav-btn.swiper-button-disabled {
+  opacity: 0.5;
+}
+
+/* Синій футер */
+.s4-blue-banner {
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(178deg, #2349F6 0%, #5B92FF 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 16px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  box-sizing: border-box;
+}
+
+
+
+
+
+
+/* Глобальний контейнер блоку 5 */
+.s5 {
+  width: 428px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 45px 24px;
+  gap: 32px;
+  box-sizing: border-box;
+}
+
+/* --- Заголовок --- */
+.s5-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+.s5-title-wrap {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.s5-title-black {
+  color: #020202;
+  font-size: 40px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.s5-title-red {
+  color: #ED1F35;
+  font-size: 40px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.s5-subtitle {
+  color: black;
+  font-size: 18px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* --- Плашка з питанням --- */
+.s5-question-box {
+  width: 310px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.s5-q-icon {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.s5-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.s5-q-text {
+  width: 169px;
+  color: black;
+  font-size: 16px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+.s5-avatar-wrap {
+  width: 59px;
+  height: 59px;
+  border-radius: 50%;
+  outline: 1px solid #ED1F35;
+  outline-offset: -1px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.s5-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Список карток --- */
+.s5-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Спільні стилі для карток */
+.s5-card {
+  width: 380px;
+  border-radius: 24px;
+  background-image: url(../images-t2/img.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Верхня частина картки (з фото) */
+.s5-card-top {
+  position: relative;
+  width: 100%;
+  height: 155px; /* Базова висота для зображень */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.s5-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Специфічні налаштування для фотографій, щоб вони ідеально сіли */
+.s5-img-01 { object-fit: contain; width: 289px;
+height: 190px; transform: scale(1.35); margin-top: -30px; }
+.s5-img-02 { object-fit: contain; transform: scale(1.2); margin-top: 10px; }
+.s5-top-03 { height: 150px; padding: 0px; }
+.s5-img-03 { object-fit: cover; border-radius: 12px; }
+.s5-img-04 { object-fit: contain; transform: scale(1); margin-top: 10px; }
+.s5-img-05 {     object-fit: contain;
+    transform: scale(1.5);
+    margin-top: -15px; }
+
+/* Кружок з цифрою */
+.s5-circle-num {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 45px;
+  height: 45px;
+  background: radial-gradient(circle, rgba(237,31,53,0.8) 0%, rgba(247,89,106,0.5) 100%);
+  backdrop-filter: blur(4px);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 16px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 500;
+}
+
+/* Нижня червона частина картки (з текстом) */
+.s5-card-bottom {
+  width: 100%;
+  background-image: url(../images-t2/frame.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 24px;
+  overflow: hidden;
+  padding: 20px 24px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.s5-card-bottom-h{
+  margin-top: -40px;
+}
+
+.s5-card-title {
+  color: white;
+  font-size: 16px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+.s5-card-desc {
+  color: white;
+  font-size: 14px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* --- Блок довіри --- */
+.s5-trust-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}
+.s5-trust-img {
+  height: 30px;
+  margin-top: -15px;
+  object-fit: contain;
+}
+
+
+
+
+
+
+
+.s6 {
+  width: 440px;
+  background: #ffffff;
+  padding: 60px 0 60px 24px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+/* --- Заголовок --- */
+.s6-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 32px;
+  padding-right: 24px;
+}
+
+.s6-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.s6-quote-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.s6-label-text {
+  color: #000000;
+  font-size: 20px;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.s6-title {
+font-weight: 500;
+font-size: 35px;
+line-height: 100%;
+    font-family: 'Anton', sans-serif;
+text-transform: uppercase;
+color: #000;
+}
+
+.s6-title-sub{
+font-weight: 400;
+font-size: 18px;
+text-transform: uppercase;
+color: #000;
+}
+
+/* --- Слайдер --- */
+.s6-swiper {
+  width: 100%;
+  overflow: visible !important;
+}
+
+.s6-slide {
+  width: 295px !important;
+  height: 524px;
+  position: relative;
+  cursor: pointer;
+  border-radius: 12px;
+  box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.20);
+  overflow: hidden;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.s6-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 24px;
+}
+
+.swiper-slide,
+.swiper-slide video{
+  border-radius: 24px !important;
+  overflow: hidden !important;
+}
+
+/* --- Контроли --- */
+.s6-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 24px;
+  margin-top: 24px;
+}
+
+/* Пагінація */
+.s6-pagination {
+  display: flex;
+  max-width: 190px;
+  margin-top: 17px;
+  overflow: hidden;
+  gap: 10px;
+  align-items: center;
+  position: relative !important;
+  width: auto !important;
+}
+
+.s6-pagination .swiper-pagination-bullet {
+  min-width: 8px !important;
+  height: 8px !important;
+  background: transparent !important;
+  border: 1px solid #000 !important;
+  opacity: 0.5 !important;
+  margin: 0 !important;
+  border-radius: 50% !important;
+  transition: all 0.2s ease;
+}
+
+.s6-pagination .swiper-pagination-bullet-active {
+  background: #000 !important;
+  border: none !important;
+  opacity: 1 !important;
+}
+
+/* Стрілки */
+.s6-nav {
+  display: flex;
+  gap: 14px;
+}
+
+.s6-prev,
+.s6-next {
+  width: 45px !important;
+  height: 45px !important;
+  background: linear-gradient(180deg, #FF009B 0%, #D80083 100%) !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: static !important;
+  margin: 0 !important;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.s6-prev {
+  transform: rotate(180deg);
+}
+
+.s6-prev.swiper-button-disabled,
+.s6-next.swiper-button-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.s6-prev::after,
+.s6-next::after {
+  display: none !important;
+}
+
+.s6-prev svg,
+.s6-next svg {
+  width: 24px;
+  height: 24px;
+}
+
+.s6-prev svg {
+  transform: rotate(180deg);
+}
+
+
+
+
+
+
+
+/* Глобальний контейнер блоку 7 */
+.st7 {
+  width: 428px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 45px 0;
+  gap: 32px;
+  box-sizing: border-box;
+}
+
+/* --- Заголовок --- */
+.st7-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+.st7-title-black {
+  color: #020202;
+  font-size: 40px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 47px;
+  text-align: center;
+}
+.st7-subtitle {
+  color: black;
+  font-size: 18px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* --- Сітка карток (2x2) --- */
+.st7-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px 14px;
+  width: 100%;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+/* Окрема картка */
+.st7-card {
+  display: flex;
+  flex-direction: column;
+  background: #F7F7F7;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Верхня частина з текстом */
+.st7-card-top {
+  height: 117px;
+  background: #F7F7F7;
+  padding: 12px 12px 24px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  text-align: center;
+  gap: 2px;
+}
+.st7-card-title {
+  color: #F83A4F;
+  font-size: 30px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  height: 34px;
+  display: flex;
+  align-items: center;
+}
+.st7-card-desc {
+  color: rgba(0, 0, 0, 0.70);
+  font-size: 16px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+/* Нижня частина з відео */
+.st7-video-container {
+  height: 101px;
+  width: 100%;
+  margin-top: -21px;
+  position: relative;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  outline: 1px solid white;
+  outline-offset: -1px;
+}
+.video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.s2-star{
+  width: 17px;
+  height: 17px;
+}
+
+/* --- Оверлей для кнопки Play --- */
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.1);
+  cursor: pointer;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+.video-overlay.is-playing {
+  opacity: 0;
+}
+.video-overlay:hover.is-playing {
+  opacity: 1;
+}
+.video-play-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.video-play-btn svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0px 0px 10px rgba(241, 144, 196, 0.66));
+}
+
+/* --- Синій футер --- */
+.st7-blue-banner {
+  width: 100%;
+  height: 38px;
+  background: linear-gradient(90deg, #FD7382 0%, #F83A4F 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 15px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  box-sizing: border-box;
+}
+
+
+
+
+
+
+/* Глобальний контейнер блоку 8 */
+.st8 {
+  width: 428px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 45px 24px;
+  gap: 24px;
+  box-sizing: border-box;
+}
+
+/* --- Заголовок --- */
+.st8-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  margin-bottom: -10.5px;
+}
+.st8-title-wrap {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Пробіл між словами */
+}
+.st8-title-black {
+  color: #020202;
+  font-size: 40px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 47px;
+}
+.st8-title-red {
+  color: #F83A4F;
+  font-size: 40px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 47px;
+}
+.st8-subtitle {
+  color: black;
+  font-size: 18px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* --- Плашка з питанням --- */
+
+/* --- Спільні стилі карток --- */
+.st8-card {
+  width: 100%;
+  border-radius: 20px;
+  padding: 24px 24px 25px 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+}
+.st8-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Лінія розділювача */
+.st8-divider {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.st8-divider svg {
+  width: 100%;
+  height: auto;
+}
+
+/* Списки фіч */
+.st8-features {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.st8-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.st8-check-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* Кнопки */
+.st8-btn {
+  width: 341px;
+  flex-shrink: 0;
+  height: 56px;
+  border-radius: 54px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+/* --- Червона Картка (MEMBERSHIP) --- */
+.st8-card-red {
+  background: linear-gradient(90deg, #FD7382 0%, #F83A4F 100%);
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.15);
+  outline: 1px solid white;
+  outline-offset: -1px;
+}
+.st8-plan-title {
+  color: white;
+  font-size: 32px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 800;
+  line-height: 48px;
+  text-transform: uppercase;
+}
+.st8-plan-price {
+  color: white;
+  font-size: 20px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  margin-top: -5px;
+}
+.st8-plan-desc, .st8-plan-desc-black {
+  margin-bottom: 3px;
+}
+.st8-plan-desc, .st8-feature-text {
+  color: white;
+  font-size: 14px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  line-height: 18px;
+}
+.st8-btn-white {
+  background: white;
+  color: black;
+  box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.25) inset, 0px -4px 4px rgba(255, 255, 255, 0.25) inset;
+  outline: 2px solid rgba(255, 255, 255, 0.80);
+  outline-offset: -2px;
+  letter-spacing: 2.56px;
+}
+
+/* --- Біла Картка (LIFETIME) --- */
+.st8-card-white {
+  background: white;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.15);
+}
+.st8-plan-title-black {
+  color: black;
+  font-size: 32px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 800;
+  line-height: 48px;
+  text-transform: uppercase;
+}
+.st8-plan-price-black {
+  color: black;
+  font-size: 20px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  margin-top: -5px;
+  margin-bottom: 3px;
+}
+.st8-plan-price span{
+  font-weight: 400;
+font-size: 50px;
+line-height: 106%;
+color: #FBF6F4;
+font-family: 'Anton', sans-serif;
+}
+.st8-plan-price-black span{
+font-family: 'Anton', sans-serif;
+font-weight: 400;
+font-size: 50px;
+line-height: 106%;
+background: linear-gradient(90deg, #FD7382 0%, #F83A4F 100%);
+background-clip: text;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+
+}
+.st8-plan-desc-black, .st8-feature-text-black {
+  color: black;
+  font-size: 14px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  line-height: 18px;
+}
+.st8-btn-red {
+  background: linear-gradient(90deg, #FD7382 0%, #F83A4F 100%);
+  color: white;
+  box-shadow: 0px 2.97px 11.14px rgba(0, 0, 0, 0.15);
+  outline: 1.49px solid white;
+  outline-offset: -1.49px;
+  height: 72px; /* Збільшена висота кнопки за макетом */
+}
+
+/* --- Нижній текст --- */
+.st8-footer-text {
+  text-align: center;
+  color: black;
+  font-size: 16px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  line-height: 20px;
+  padding: 0;
+}
+
+
+
+
+
+
+
+
+  .s12 {
+    width: 428px;
+    padding: 40px 24px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+
+  .s12-header {
+    width: 100%;
+    text-align: left;
+    color: black;
+    font-size: 40px;
+        font-family: 'Anton', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .s12-faq-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .s12-faq-item {
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 16px 0;
+  }
+  
+  .s12-faq-item:last-child {
+    border-bottom: none;
+  }
+
+  /* --- Question Row --- */
+  .s12-faq-question {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 14px;
+    user-select: none;
+  }
+
+  .s12-q-icon {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .s12-q-text {
+    flex: 1;
+    color: black;
+    font-size: 16px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  .s12-arrow {
+    width: 22px;
+    height: 14px;
+    object-fit: contain;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    /* Оскільки стрілка img32.webp дивиться вгору, за замовчуванням перевертаємо її вниз */
+    transform: rotate(180deg); 
+  }
+
+  .s12-faq-item.active .s12-arrow {
+    transform: rotate(0deg); /* При відкритті стрілка дивиться вгору */
+  }
+
+  /* --- Answer Row (Hidden by default) --- */
+  .s12-faq-answer-wrapper {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+  }
+
+  .s12-faq-answer-inner {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    padding-top: 16px;
+    padding-bottom: 8px;
+  }
+
+  .s12-faq-bubble-container {
+    flex: 1;
+    position: relative;
+    display: flex;
+  }
+
+  .s12-faq-bubble {
+    background: #F3F3F3;
+    border-radius: 24px;
+    padding: 14px 18px;
+    color: black;
+    font-size: 16px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 400;
+    line-height: 1.4;
+    width: 100%;
+  }
+
+  .s12-bubble-tail {
+    position: absolute;
+    right: -7px; /* Налаштовано для з'єднання бульки та аватарки */
+    bottom: 0px; 
+    width: 37px;
+    height: 26px;
+    z-index: 1;
+  }
+
+  .s12-avatar {
+    width: 59px;
+    height: 59px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid #F3F3F3; /* Легка обводка для плавності */
+  }
+
+
+
+
+
+
+
+  /* Глобальний контейнер блоку 9 */
+.st9 {
+  width: 428px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 44px 24px 45px 24px;
+  gap: 14px;
+  box-sizing: border-box;
+}
+
+/* --- Гарантія --- */
+.st9-guarantee {
+  width: 100%;
+  background: linear-gradient(90deg, #FD7382 0%, #F83A4F 100%);
+  border-radius: 12px;
+  outline: 3px solid rgba(255, 255, 255, 0.12);
+  outline-offset: -3px;
+  padding: 27px 7px 27px 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 76px;
+}
+.st9-guarantee-icon {
+  width: 103px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.st9-guarantee-img {
+  width: 79px;
+  height: auto;
+  object-fit: contain;
+}
+.st9-guarantee-text {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.st9-guarantee-title {
+  color: white;
+  font-size: 32px;
+  font-family: 'Outfit', sans-serif; /* Вказано в оригіналі, за відсутності можна Source Sans 3 */
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.st9-guarantee-desc {
+  color: white;
+  font-size: 14px;
+  font-family: 'Source Sans 3', sans-serif;
+  line-height: 20px;
+}
+.st9-guarantee-desc strong {
+  font-weight: 700;
+}
+
+/* --- Заголовок Math --- */
+.st9-math-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  width: 100%;
+}
+.st9-title-black {
+  color: #020202;
+  font-size: 40px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  line-height: 47px;
+  text-transform: uppercase;
+}
+.st9-title-red {
+  color: #F83A4F;
+  font-size: 40px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  line-height: 47px;
+  text-transform: uppercase;
+}
+
+/* --- Питання "Is it worth?" --- */
+.st9-worth-box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
+  height: 100px;
+  padding-left: 16px;
+  box-sizing: border-box;
+}
+.st9-worth-img {
+  width: 124px;
+  height: 100px;
+  object-fit: contain;
+}
+.st9-worth-text {
+  color: black;
+  font-size: 20px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+}
+.st9-worth-text strong {
+  font-weight: 700;
+}
+
+/* --- Список Math --- */
+.st9-math-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+.st9-math-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border-radius: 20px;
+  padding: 8px 9px 8px 8px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  box-sizing: border-box;
+}
+.st9-item-left {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+}
+.st9-item-icon {
+  width: 56px;
+  height: 48px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid #eee;
+}
+.st9-item-name {
+  color: black;
+  font-size: 16px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+  line-height: 20px;
+}
+.st9-item-right {
+  text-align: right;
+  white-space: nowrap;
+}
+.st9-price-val {
+  color: #F83A4F;
+  font-size: 24px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 800;
+}
+.st9-price-per {
+  color: #F83A4F;
+  font-size: 15px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+/* --- Велика графіка --- */
+.st9-big-graphic {
+  width: 428px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.st9-big-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* --- Кнопка і футер --- */
+.st9-bottom-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+}
+.st9-btn {
+  width: 100%;
+  height: 72px;
+  background: linear-gradient(90deg, #FD7382 0%, #F83A4F 100%);
+  border-radius: 74px;
+  box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.15);
+  outline: 1.5px solid white;
+  outline-offset: -1.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 32px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.st9-footer-text {
+  text-align: center;
+  color: black;
+  font-size: 14px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  line-height: 1.4;
+  padding: 0;
+}
+
+
+
+
+
+
+/* --- СЕКЦІЯ 10: Results after YOU JOIN --- */
+.st10 {
+  width: 428px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 24px;
+  gap: 24px;
+  box-sizing: border-box;
+}
+.st10-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.st10-title-red {
+  color: #F83A4F;
+  font-size: 40px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.80px;
+}
+.st10-title-black {
+  color: black;
+  font-size: 40px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.80px;
+}
+
+/* Картки */
+.st10-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+.st10-card {
+  width: 380px;
+  min-height: 105px;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.st10-card-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+.st10-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.st10-left {
+  width: 60%;
+  padding: 16px 20px;
+}
+.st10-right {
+  width: 65%;
+  padding: 16px 20px;
+  margin-left: auto;
+  text-align: left;
+}
+.st10-strong {
+  color: white;
+  font-size: 16px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.st10-norm {
+  color: white;
+  font-size: 16px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+
+/* --- СЕКЦІЯ 11: WHY THIS PROGRAM WORKS --- */
+.st11 {
+  width: 428px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 39px 24px 46px 24px;
+  gap: 32px;
+  box-sizing: border-box;
+}
+.st11-header {
+  text-align: center;
+  line-height: 1.2;
+}
+.st11-title-black {
+  color: black;
+  font-size: 40px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.80px;
+}
+.st11-title-red {
+  color: #ED1F35;
+}
+
+/* Іконки навігації */
+.st11-icons-row {
+  display: flex;
+  justify-content: center;
+  gap: 13px;
+  width: 100%;
+}
+.st11-icon-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.st11-icon-circle {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(90deg, #FD7382 0%, #F83A4F 100%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  outline: 1px solid rgba(255, 255, 255, 0.50);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+.st11-icon-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.st11-icon-label {
+  color: black;
+  font-size: 14px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+}
+
+/* Кроки */
+.st11-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 43px;
+  width: 100%;
+  margin-top: 4px;
+}
+.st11-step {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+.st11-step-num {
+  width: 72px;
+  color: rgba(248, 58, 79, 0.20);
+  font-size: 70px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  text-align: center;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.st11-step-img-wrap {
+  width: 86px;
+  height: 87px;
+  border-radius: 8px;
+  outline: 1px solid #F83A4F;
+  outline-offset: -1px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.st11-step-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.st11-step:nth-child(even) .st11-step-num {
+  width: 82px;
+}
+.st11-step-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.st11-step-title {
+  color: #F83A4F;
+  font-size: 16px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+  line-height: 23px;
+  text-transform: uppercase;
+}
+.st11-step-desc {
+  color: black;
+  font-size: 16px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  line-height: 23px;
+}
+
+
+
+
+/* Глобальний контейнер блоку 12 */
+.st12 {
+  width: 428px;
+  /* Градієнт для плавного переходу + фонове зображення з віялом карток */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 50%, white 100%), 
+              url('../images-t2/img19.webp') top center / 100% no-repeat, 
+              #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Збільшений верхній відступ, щоб фонові картки було добре видно */
+  padding: 160px 24px 45px 24px;
+  box-sizing: border-box;
+}
+
+.pr{
+  font-weight: 800;
+font-size: 50px;
+line-height: 156%;
+color: #F23A4D;
+}
+
+/* Внутрішня біла картка з контентом */
+.st12-inner-card {
+  width: 100%;
+  background: white;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  border: 1px solid #F23A4D; /* Червона обводка з вашого коду */
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Заголовок */
+.st12-title {
+  color: black;
+  font-size: 25px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.2;
+  padding-bottom: 20px;
+}
+
+/* Список */
+.st12-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  padding: 15px 0;
+}
+.st12-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.st12-check-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.st12-list-text {
+  color: black;
+  font-size: 14px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  line-height: 18px;
+  padding-top: 2px; /* Легке вирівнювання по висоті іконки */
+}
+
+/* Підсумок "All of it:" */
+.st12-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.st12-summary-text {
+  color: black;
+  font-size: 20px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Група кнопки */
+.st12-bottom-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+.st12-btn {
+  width: 100%;
+  height: 72px;
+  background: linear-gradient(90deg, #FD7382 0%, #F83A4F 100%);
+  border-radius: 74px;
+  box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.15);
+  outline: 1.5px solid white;
+  outline-offset: -1.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 27px;
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+}
+.st12-cancel-text {
+  color: black;
+  font-size: 14px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: center;
+}
+
+
+
+.contacts {
+    padding: 8px 24px 280px 24px;
+
+  position: relative;
+  z-index: 9;
+    box-sizing: border-box;
+}
+
+.contacts__title {
+    font-size: 40px;
+    font-weight: 500;
+    margin: 0 0 36px 0;
+    letter-spacing: -0.5px;
+        font-family: 'Anton', sans-serif;
+    color: #000;
+    text-align: left;
+}
+
+.contacts__grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.contacts__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 118px;
+    height: 120px;
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.1), inset 0 -2px 4px 0 rgba(255, 255, 255, 0.25);
+background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.08) 100%);
+    border-radius: 30px;
+    text-decoration: none;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+
+}
+
+.contacts__icon {
+    width: 37%;
+    object-fit: contain;
+    margin-bottom: 12px;
+}
+
+.contacts__icon--email {
+    width: 48px;
+}
+
+.contacts__label {
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+   
+    letter-spacing: 0.2px;
+}
+
+.contacts__policy {
+    display: inline-block;
+    color: #808080;
+    font-size: 13px;
+
+    font-weight: 400;
+    text-decoration: underline;
+    margin-bottom: 15px;
+}
+
+.contacts__copyright {
+    color: #808080;
+    font-size: 13px;
+   
+    font-weight: 400;
+    line-height: 1.4;
+    margin: 0 0 36px 0;
+}
+
+.contacts__payments {
+    display: block;
+    width: 100%;
+    max-width: 90%;
+    height: auto;
+    object-fit: contain;
+    margin-left: -2px;
+}
+
+/* Базовий контейнер (ваші старі стилі фіксації знизу) */
+.footer-bg {
+    position: fixed;
+    z-index: 99;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(150px);
+    transition: all .5s ease;
+}
+
+.footer-bg.active {
+    transform: translateY(0px);
+    opacity: 1;
+}
+
+/* Новий дизайн самого футера */
+.footer {
+    width: 428px;
+    padding: 24px 24px 40px 24px;
+    background: rgba(255, 255, 255, 0.70);
+    box-shadow: 0px -5px 18px rgba(0, 0, 0, 0.25);
+    border-radius: 32px 32px 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    backdrop-filter: blur(6px); /* Ефект розмиття фону */
+}
+
+/* Верхній рядок з таймером */
+.footer-timer-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-timer-title {
+    flex: 1 1 0;
+    color: black;
+    font-size: 20px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.footer-text-n{
+  font-weight: 700;
+font-size: 14px;
+line-height: 143%;
+padding-bottom: 5px;
+padding-top: 15px;
+text-align: center;
+text-transform: uppercase;
+color: #000;
+}
+
+/* Обгортка таймера */
+.timer-display {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Нові світлі блоки для цифр */
+.timer-box {
+    width: 38px;
+    padding: 10px 8px;
+    background: #F3F3F3;
+    border-radius: 15px;
+    outline: 1px solid rgba(142, 45, 53, 0.15);
+    outline-offset: -1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #B33153;
+    font-size: 20px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+    line-height: 20px;
+    box-sizing: border-box;
+}
+
+/* Перефарбовуємо інлайнові крапки під новий стиль (без зміни HTML) */
+.timer-display > div:not(.timer-box) > div {
+    background: #B33153 !important; 
+    opacity: 0.6;
+}
+
+/* Нова кнопка з червоним градієнтом */
+.footerButton-new {
+    width: 100%;
+    max-width: 380px;
+    padding: 26px 20px 17px 20px;
+    background-image: url(../images-t2/btn.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border-radius: 54px;
+    outline-offset: -2px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: 0.2s;
+    position: relative; /* Для позиціонування лінії свічення */
+}
+
+
+.footerButton-new:active {
+    opacity: 0.8;
+}
+
+/* Уніфікований текст кнопки */
+.btn-text-large,
+.btn-text-small {
+    color: white;
+    font-size: 19px;
+    font-family: 'Onest', sans-serif;
+    font-weight: 700;
+    text-transform: capitalize;
+    letter-spacing: 1.52px;
+    white-space: nowrap;
+}
+
+.btn-text-small.lowercase {
+    text-transform: capitalize;
+}
+
+
+
+/* Верхній рядок з таймером */
+.footer-timer-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-timer-title {
+  font-weight: 400;
+font-size: 20px;
+line-height: 100%;
+text-transform: uppercase;
+color: #000;
+}
+
+/* Обгортка таймера */
+.timer-display {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Світлі блоки для цифр */
+.timer-box {
+    width: 38px;
+    padding: 10px 8px;
+    background: linear-gradient(180deg, rgba(27, 27, 27, 0.55) 0%, rgba(62, 62, 62, 0.55) 100%);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 20px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+    line-height: 20px;
+    box-sizing: border-box;
+}
+
+/* Лінія-розділювач між цифрами */
+.timer-separator {
+    width: 2.63px;
+    height: 8.23px;
+    background: #fff; /* Замість white, щоб було видно на світлому фоні */
+    opacity: 0.60;
+}
+
+
+
+
+@media (max-width: 440px) {
+  /* Глобальний контейнер екрану */
+  .s1 {
+    width: 100vw;
+    height: 191.36vw;
+  }
+  .s1-header {
+    width: 88.08vw;
+    left: 5.84vw;
+    top: 10.98vw;
+    gap: 2.69vw;
+  }
+  .s1-title {
+    font-size: 12.62vw;
+    line-height: 13.25vw;
+    letter-spacing: 0.13vw;
+  }
+  .s1-description {
+    font-size: 4.67vw;
+    line-height: 4.44vw;
+    letter-spacing: 0.05vw;
+  }
+  .s1-date-pill {
+    width: 46.96vw;
+    height: 10.05vw;
+    left: 26.4vw;
+    top: 47.43vw;
+    padding: 0 2.8vw;
+    box-shadow: 0 0.93vw 1.87vw rgba(0, 0, 0, 0.15);
+    border-radius: 2.8vw;
+    outline: 0.23vw solid #EF3145;
+    outline-offset: -0.23vw;
+    gap: 2.8vw;
+  }
+  .s1-date-icon {
+    width: 3.39vw;
+    height: 3.5vw;
+  }
+  .s1-date-pill span {
+    font-size: 3.74vw;
+  }
+  .s1-carousel-wrap {
+    width: 100vw;
+    height: 40.89vw;
+    top: 56.78vw;
+    perspective: 186.92vw;
+  }
+  .s1-card {
+    width: 22.2vw;
+    height: 34.11vw;
+    left: 39.25vw;
+    border-radius: 2.34vw;
+    transform: rotateY(calc(-22.5deg * var(--i))) translateZ(-60.75vw);
+    box-shadow: 0 2.34vw 4.67vw rgba(0,0,0,0.3);
+    -webkit-box-reflect: below 1.17vw linear-gradient(transparent 50%, rgba(0,0,0,0.2));
+  }
+  .s1-price-badge {
+    width: 33.89vw;
+    height: 33.89vw;
+    left: -4.21vw;
+    top: 82.67vw;
+  }
+  .s1-main-img {
+    width: 121.5vw;
+    height: 88.08vw;
+    left: -1.4vw;
+    top: 66.59vw;
+  }
+  .s1-bottom-bg {
+    height: 45.79vw;
+  }
+  .s1-bottom-panel {
+    width: 100vw;
+    top: 145.79vw;
+    padding: 0 5.61vw 9.35vw 5.61vw;
+    gap: 3.27vw;
+  }
+  .s1-benefits-row {
+    height: 4.67vw;
+  }
+  .s1-benefit-item {
+    gap: 1.87vw;
+    font-size: 3.27vw;
+    line-height: 3.5vw;
+  }
+  .s1-benefit-icon {
+    width: 4.67vw;
+    height: 4.67vw;
+  }
+  .s1-action-group {
+    gap: 3.97vw;
+  }
+  .s1-action-card {
+    box-shadow: 0 1.05vw 4.21vw rgba(0, 0, 0, 0.10);
+    border-radius: 9.48vw;
+    padding: 3.27vw 5.61vw;
+    gap: 3.97vw;
+  }
+  .s1-action-text {
+    width: 28.27vw;
+    font-size: 3.27vw;
+    line-height: 4.44vw;
+  }
+  .s1-action-btn {
+    width: 51.4vw;
+    height: 12.15vw;
+    border-radius: 23.36vw;
+    font-size: 4.22vw;
+    line-height: 5.69vw;
+  }
+  .s1-trust-img {
+    width: 88.79vw;
+    height: 5.96vw;
+  }
+
+  /* Глобальний контейнер блоку 2 */
+  .s2 {
+    width: 100vw;
+    padding: 10.51vw 5.61vw;
+    gap: 7.48vw;
+  }
+  .q-pill {
+    width: 88.79vw;
+    height: 8.88vw;
+    box-shadow: 0 1.87vw 3.69vw rgba(0, 0, 0, 0.09);
+    border-radius: 233.64vw;
+    outline: 0.23vw solid #F83A4F;
+    gap: 2.8vw;
+  }
+  .q-pill-icon {
+    width: 5.72vw;
+    height: 5.02vw;
+  }
+  .q-pill-text {
+    font-size: 3.74vw;
+    line-height: 8.41vw;
+  }
+  .s2-everything {
+    width: 86.45vw;
+    height: 24.77vw;
+  }
+  .s2-everything img {
+    left: -9.35vw;
+    top: -5.49vw;
+    width: 103.74vw;
+    height: 41.71vw;
+  }
+  .s2-footer-text {
+    line-height: 5.37vw;
+  }
+  .s2-fw-400 {
+    font-size: 3.74vw;
+  }
+  .s2-fw-700 {
+    font-size: 3.74vw;
+  }
+  .s2-grid-wrapper {
+    width: 86.92vw;
+    gap: 7.48vw;
+  }
+  .s2-cat {
+    gap: 1.87vw;
+  }
+  .s2-cat-title {
+    height: 7.48vw;
+    padding: 0 3.27vw;
+    border: 0.47vw solid #ffffff;
+    border-radius: 233.64vw;
+    box-shadow: 0 0 0.35vw rgba(0, 0, 0, 0.25);
+    font-size: 3.74vw;
+    line-height: 4.67vw;
+  }
+  .s2-cat-row {
+    gap: 2.36vw;
+  }
+  .s2-cat-row img {
+    height: 30.96vw;
+    border-radius: 2.34vw;
+  }
+  .s2-tools {
+    width: 86.92vw;
+    height: 6.54vw;
+    padding: 0 3.27vw;
+    box-shadow: 0 0.93vw 1.8vw rgba(0, 0, 0, 0.25);
+    border-radius: 233.64vw;
+    font-size: 3.74vw;
+    line-height: 4.67vw;
+  }
+  .s2-guides {
+    gap: 1.87vw;
+  }
+  .s2-guide {
+    width: 28.27vw;
+    padding: 0.93vw 0.93vw 3.27vw 0.93vw;
+    box-shadow: 0 0.93vw 3.5vw rgba(0, 0, 0, 0.15);
+    border-radius: 3.28vw;
+    gap: 3.27vw;
+  }
+  .s2-guide-img {
+    width: 26.4vw;
+    height: 31.78vw;
+  }
+  .s2-guide-img-1 {
+    left: -1.4vw;
+    top: -2.22vw;
+    width: 28.86vw;
+    height: 34.7vw;
+  }
+  .s2-guide-img-2 {
+    left: -0.23vw;
+    top: -2.1vw;
+    width: 27.8vw;
+    height: 35.4vw;
+  }
+  .s2-guide-img-3 {
+    left: -1.05vw;
+    top: -2.45vw;
+    width: 27.69vw;
+    height: 35.28vw;
+  }
+  .s2-guide-text {
+    gap: 0.33vw;
+    font-size: 3.27vw;
+    line-height: 4.67vw;
+  }
+  .s2-unlock-group {
+    width: 88.79vw;
+    gap: 1.87vw;
+  }
+  .s2-unlock-btn {
+    width: 88.79vw;
+    height: 20.33vw;
+    padding: 0 4.67vw;
+    border-radius: 12.62vw;
+    outline: 0.47vw solid rgba(255, 255, 255, 0.80);
+    outline-offset: -0.47vw;
+    font-size: 7.48vw;
+  }
+  .s2-unlock-text {
+    font-size: 3.27vw;
+    line-height: 4.21vw;
+  }
+
+  /* --- Безкінечний рухомий рядок --- */
+  .s2-marquee-container {
+    width: 100vw;
+    height: 8.88vw;
+  }
+  .s2-marquee-item {
+    gap: 2.34vw;
+    width: 35.05vw;
+  }
+  .st7 .s2-marquee-item {
+    padding: 0 0.93vw;
+  }
+  .s2-marquee-item span {
+    font-size: 3.5vw;
+  }
+
+  /* Глобальний контейнер блоку 3 */
+  .s3 {
+    width: 100vw;
+    padding: 10.51vw 0 0 0;
+    gap: 5.61vw;
+  }
+  .s3-title-black {
+    font-size: 9.35vw;
+    line-height: 10.98vw;
+  }
+  .s3-title-red {
+    font-size: 9.35vw;
+    line-height: 10.98vw;
+  }
+  .s3-cards {
+    gap: 1.87vw;
+  }
+  .s3-card {
+    width: 28.34vw;
+    height: 49.53vw;
+    padding: 3.27vw 0.93vw 3.27vw 1.87vw;
+    border-radius: 3.74vw;
+  }
+  .s3-card-icon {
+    width: 9.81vw;
+    height: 9.81vw;
+    margin-bottom: 3.5vw;
+  }
+  .s3-card-title {
+    font-size: 4.21vw;
+    line-height: 4.67vw;
+    margin-bottom: 0.93vw;
+  }
+  .s3-card-desc {
+    font-size: 3.27vw;
+    line-height: 3.74vw;
+  }
+  .s3-img {
+    width: 100vw;
+    height: 69.39vw;
+  }
+
+  /* Глобальний контейнер блоку 4 */
+  .s4 {
+    width: 100vw;
+    padding: 14.25vw 0 10.51vw 0;
+  }
+  .s4-header {
+    gap: 0.47vw;
+    padding: 0 5.61vw;
+    margin-bottom: 4.21vw;
+  }
+  .s4-title-black {
+    font-size: 9.35vw;
+    line-height: 10.98vw;
+  }
+  .s4-title-red {
+    font-size: 5.61vw;
+    line-height: 6.54vw;
+  }
+  .s4-question-box {
+    margin-bottom: 7.48vw;
+  }
+  .s4-swiper {
+    height: 100.47vw;
+    padding-left: 5.61vw !important;
+  }
+  .s4-slide {
+    width: 66.82vw !important;
+    height: 100vw;
+    border-radius: 5.61vw;
+    box-shadow: 0vw 0.93vw 3.22vw rgba(0, 0, 0, 0.15);
+  }
+  .s4-slide-fade {
+    height: 51.4vw;
+  }
+  .s4-slide-content {
+    padding: 4.67vw;
+    gap: 0.93vw;
+  }
+  .s4-slide-title {
+    font-size: 4.67vw;
+  }
+  .s4-slide-desc {
+    font-size: 3.27vw;
+    line-height: 3.97vw;
+  }
+  .s4-controls {
+    padding: 0 5.61vw;
+    margin-top: 10.51vw;
+    margin-bottom: 13.55vw;
+  }
+  .s4-pagination {
+    gap: 3.27vw;
+  }
+  .s4-pagination .swiper-pagination-bullet {
+    width: 1.87vw !important;
+    height: 1.87vw !important;
+    border-width: 0.23vw !important;
+  }
+  .s4-pagination .swiper-pagination-bullet-active {
+    outline-width: 0.47vw;
+  }
+  .s4-nav {
+    gap: 3.27vw;
+  }
+  .s4-nav-btn {
+    width: 10.51vw;
+    height: 10.51vw;
+  }
+  .s4-blue-banner {
+    padding: 2.34vw;
+    font-size: 3.74vw;
+  }
+
+  /* Глобальний контейнер блоку 5 */
+  .s5 {
+    width: 100vw;
+    padding: 10.51vw 5.61vw;
+    gap: 7.48vw;
+  }
+  .s5-header {
+    gap: 0.93vw;
+  }
+  .s5-title-black, .s5-title-red {
+    font-size: 9.35vw;
+  }
+  .s5-subtitle {
+    font-size: 4.21vw;
+    margin-top: 2.34vw;
+  }
+  .s5-question-box {
+    width: 72.43vw;
+  }
+  .s5-q-icon {
+    width: 8.18vw;
+    height: 8.18vw;
+  }
+  .s5-q-text {
+    width: 39.49vw;
+    font-size: 3.74vw;
+  }
+  .s5-avatar-wrap {
+    width: 13.79vw;
+    height: 13.79vw;
+    outline-width: 0.23vw;
+    outline-offset: -0.23vw;
+  }
+  .s5-cards-list {
+    gap: 4.67vw;
+  }
+  .s5-card {
+    width: 88.79vw;
+    border-radius: 5.61vw;
+    box-shadow: 0vw 0.93vw 3.5vw rgba(0, 0, 0, 0.08);
+  }
+  .s5-card-top {
+    height: 36.21vw;
+  }
+  .s5-card-image {
+    padding: 2.34vw;
+  }
+  .s5-img-01 {
+    width: 67.52vw;
+    height: 44.39vw;
+    margin-top: -7.01vw;
+  }
+  .s5-img-02 {
+    margin-top: 2.34vw;
+  }
+  .s5-top-03 {
+    height: 35.05vw;
+    padding: 0vw;
+  }
+  .s5-img-03 {
+    border-radius: 2.8vw;
+  }
+  .s5-img-04 {
+    margin-top: 2.34vw;
+  }
+  .s5-img-05 {
+    margin-top: -3.5vw;
+  }
+  .s5-circle-num {
+    left: 4.67vw;
+    top: 4.67vw;
+    width: 10.51vw;
+    height: 10.51vw;
+    font-size: 3.74vw;
+  }
+  .s5-card-bottom {
+    border-radius: 5.61vw;
+    padding: 4.67vw 5.61vw;
+    gap: 1.87vw;
+  }
+  .s5-card-bottom-h {
+    margin-top: -9.35vw;
+  }
+  .s5-card-title {
+    font-size: 3.74vw;
+  }
+  .s5-card-desc {
+    font-size: 3.27vw;
+  }
+  .s5-trust-row {
+    margin-top: 2.34vw;
+  }
+  .s5-trust-img {
+    height: 7.01vw;
+    margin-top: -3.5vw;
+  }
+
+  /* Глобальний контейнер блоку 6 */
+  .s6 {
+    width: 100vw;
+    padding: 14.02vw 0 14.02vw 5.61vw;
+  }
+  .s6-header {
+    gap: 1.87vw;
+    margin-bottom: 7.48vw;
+    padding-right: 5.61vw;
+  }
+  .s6-label {
+    gap: 1.87vw;
+  }
+  .s6-label-text {
+    font-size: 4.67vw;
+  }
+  .s6-title {
+    font-size: 8.18vw;
+  }
+  .s6-title-sub {
+    font-size: 4.21vw;
+  }
+  .s6-slide {
+    width: 68.93vw !important;
+    height: 122.43vw;
+    border-radius: 2.8vw;
+    box-shadow: 0vw 0.47vw 4.67vw rgba(0, 0, 0, 0.20);
+  }
+  .s6-img {
+    border-radius: 5.61vw;
+  }
+  .swiper-slide,
+  .swiper-slide video {
+    border-radius: 5.61vw !important;
+  }
+  .s6-controls {
+    padding-right: 5.61vw;
+    margin-top: 5.61vw;
+  }
+  .s6-pagination {
+    max-width: 44.39vw;
+    margin-top: 3.97vw;
+    gap: 2.34vw;
+  }
+  .s6-pagination .swiper-pagination-bullet {
+    min-width: 1.87vw !important;
+    height: 1.87vw !important;
+    border-width: 0.23vw !important;
+  }
+  .s6-nav {
+    gap: 3.27vw;
+  }
+  .s6-prev, .s6-next {
+    width: 10.51vw !important;
+    height: 10.51vw !important;
+  }
+  .s6-prev svg, .s6-next svg {
+    width: 5.61vw;
+    height: 5.61vw;
+  }
+
+  /* Глобальний контейнер блоку 7 */
+  .st7 {
+    width: 100vw;
+    padding: 10.51vw 0;
+    gap: 7.48vw;
+  }
+  .st7-header {
+    gap: 0.93vw;
+    padding: 0 5.61vw;
+  }
+  .st7-title-black {
+    font-size: 9.35vw;
+    line-height: 10.98vw;
+  }
+  .st7-subtitle {
+    font-size: 4.21vw;
+  }
+  .st7-grid {
+    gap: 7.48vw 3.27vw;
+    padding: 0 5.61vw;
+  }
+  .st7-card {
+    border-radius: 2.8vw;
+    box-shadow: 0vw 0.93vw 3.5vw rgba(0, 0, 0, 0.08);
+  }
+  .st7-card-top {
+    height: 27.34vw;
+    padding: 2.8vw 2.8vw 5.61vw 2.8vw;
+    gap: 0.47vw;
+  }
+  .st7-card-title {
+    font-size: 7.01vw;
+    height: 7.94vw;
+  }
+  .st7-card-desc {
+    font-size: 3.74vw;
+    line-height: 4.67vw;
+  }
+  .st7-video-container {
+    height: 23.6vw;
+    margin-top: -4.91vw;
+    border-radius: 2.8vw;
+    outline-width: 0.23vw;
+    outline-offset: -0.23vw;
+  }
+  .s2-star {
+    width: 3.97vw;
+    height: 3.97vw;
+  }
+  .video-play-btn {
+    width: 10.28vw;
+    height: 10.28vw;
+  }
+  .video-play-btn svg {
+    filter: drop-shadow(0vw 0vw 2.34vw rgba(241, 144, 196, 0.66));
+  }
+  .st7-blue-banner {
+    height: 8.88vw;
+    font-size: 3.5vw;
+  }
+
+  /* Глобальний контейнер блоку 8 */
+  .st8 {
+    width: 100vw;
+    padding: 10.51vw 5.61vw;
+    gap: 5.61vw;
+  }
+  .st8-header {
+    gap: 0.93vw;
+    margin-bottom: -2.45vw;
+  }
+  .st8-title-wrap {
+    gap: 1.87vw;
+  }
+  .st8-title-black, .st8-title-red {
+    font-size: 9.35vw;
+    line-height: 10.98vw;
+  }
+  .st8-subtitle {
+    font-size: 4.21vw;
+  }
+  .st8-card {
+    border-radius: 4.67vw;
+    padding: 5.61vw 5.61vw 5.84vw 5.61vw;
+    gap: 5.37vw;
+  }
+  .st8-card-content {
+    gap: 2.8vw;
+  }
+  .st8-features {
+    gap: 1.87vw;
+  }
+  .st8-feature-item {
+    gap: 1.87vw;
+  }
+  .st8-check-icon {
+    width: 5.61vw;
+    height: 5.61vw;
+  }
+  .st8-btn {
+    width: 79.67vw;
+    height: 13.08vw;
+    border-radius: 12.62vw;
+    font-size: 7.48vw;
+  }
+  .st8-card-red {
+    box-shadow: 0vw 0vw 3.74vw rgba(0, 0, 0, 0.15);
+    outline-width: 0.23vw;
+    outline-offset: -0.23vw;
+  }
+  .st8-plan-title, .st8-plan-title-black {
+    font-size: 7.48vw;
+    line-height: 11.21vw;
+  }
+  .st8-plan-price, .st8-plan-price-black {
+    font-size: 4.67vw;
+    margin-top: -1.17vw;
+  }
+  .st8-plan-price-black {
+    margin-bottom: 0.7vw;
+  }
+  .st8-plan-desc, .st8-plan-desc-black {
+    margin-bottom: 0.7vw;
+  }
+  .st8-plan-desc, .st8-feature-text, .st8-plan-desc-black, .st8-feature-text-black {
+    font-size: 3.27vw;
+    line-height: 4.21vw;
+  }
+  .st8-btn-white {
+    box-shadow: 0vw 0.93vw 0.93vw rgba(255, 255, 255, 0.25) inset, 0vw -0.93vw 0.93vw rgba(255, 255, 255, 0.25) inset;
+    outline-width: 0.47vw;
+    outline-offset: -0.47vw;
+    letter-spacing: 0.6vw;
+  }
+  .st8-card-white {
+    box-shadow: 0vw 0vw 3.74vw rgba(0, 0, 0, 0.15);
+  }
+  .st8-plan-price span, .st8-plan-price-black span {
+    font-size: 11.68vw;
+  }
+  .st8-btn-red {
+    box-shadow: 0vw 0.69vw 2.6vw rgba(0, 0, 0, 0.15);
+    outline-width: 0.35vw;
+    outline-offset: -0.35vw;
+    height: 16.82vw;
+  }
+  .st8-footer-text {
+    font-size: 3.74vw;
+    line-height: 4.67vw;
+    padding: 0;
+  }
+
+  .s12 {
+    width: 100vw;
+    padding: 9.35vw 5.61vw;
+  }
+  .s12-header {
+    font-size: 9.35vw;
+    margin-bottom: 4.67vw;
+  }
+  .s12-faq-item {
+    padding: 3.74vw 0;
+  }
+  .s12-faq-question {
+    gap: 3.27vw;
+  }
+  .s12-q-icon {
+    width: 8.18vw;
+    height: 8.18vw;
+  }
+  .s12-q-text {
+    font-size: 3.74vw;
+  }
+  .s12-arrow {
+    width: 5.14vw;
+    height: 3.27vw;
+  }
+  .s12-faq-answer-inner {
+    gap: 2.8vw;
+    padding-top: 3.74vw;
+    padding-bottom: 1.87vw;
+  }
+  .s12-faq-bubble {
+    border-radius: 5.61vw;
+    padding: 3.27vw 4.21vw;
+    font-size: 3.74vw;
+  }
+  .s12-bubble-tail {
+    right: -1.64vw;
+    bottom: 0vw;
+    width: 8.64vw;
+    height: 6.07vw;
+  }
+  .s12-avatar {
+    width: 13.79vw;
+    height: 13.79vw;
+    border-width: 0.23vw;
+  }
+
+  /* Глобальний контейнер блоку 9 */
+  .st9 {
+    width: 100vw;
+    padding: 10.28vw 5.61vw 10.51vw 5.61vw;
+    gap: 3.27vw;
+  }
+  .st9-guarantee {
+    border-radius: 2.8vw;
+    outline-width: 0.7vw;
+    outline-offset: -0.7vw;
+    padding: 6.31vw 1.64vw 6.31vw 0;
+    gap: 1.64vw;
+    margin-bottom: 17.76vw;
+  }
+  .st9-guarantee-icon {
+    width: 24.07vw;
+  }
+  .st9-guarantee-img {
+    width: 18.46vw;
+  }
+  .st9-guarantee-text {
+    gap: 2.57vw;
+  }
+  .st9-guarantee-title {
+    font-size: 7.48vw;
+  }
+  .st9-guarantee-desc {
+    font-size: 3.27vw;
+    line-height: 4.67vw;
+  }
+  .st9-math-header {
+    gap: 1.87vw;
+  }
+  .st9-title-black, .st9-title-red {
+    font-size: 9.35vw;
+    line-height: 10.98vw;
+  }
+  .st9-worth-box {
+    gap: 2.34vw;
+    height: 23.36vw;
+    padding-left: 3.74vw;
+  }
+  .st9-worth-img {
+    width: 28.97vw;
+    height: 23.36vw;
+  }
+  .st9-worth-text {
+    font-size: 4.67vw;
+  }
+  .st9-math-list {
+    gap: 1.87vw;
+  }
+  .st9-math-item {
+    border-radius: 4.67vw;
+    padding: 1.87vw 2.1vw 1.87vw 1.87vw;
+    box-shadow: 0vw 0.47vw 1.87vw rgba(0, 0, 0, 0.15);
+  }
+  .st9-item-left {
+    gap: 3.97vw;
+  }
+  .st9-item-icon {
+    width: 13.08vw;
+    height: 11.21vw;
+    border-radius: 1.4vw;
+    border-width: 0.23vw;
+  }
+  .st9-item-name {
+    font-size: 3.74vw;
+    line-height: 4.67vw;
+  }
+  .st9-price-val {
+    font-size: 5.61vw;
+  }
+  .st9-price-per {
+    font-size: 3.5vw;
+  }
+  .st9-big-graphic {
+    width: 100vw;
+  }
+  .st9-bottom-group {
+    gap: 1.17vw;
+  }
+  .st9-btn {
+    height: 16.82vw;
+    border-radius: 17.29vw;
+    box-shadow: 0vw 0.7vw 2.57vw rgba(0, 0, 0, 0.15);
+    outline-width: 0.35vw;
+    outline-offset: -0.35vw;
+    font-size: 7.48vw;
+  }
+  .st9-footer-text {
+    font-size: 3.27vw;
+    padding: 0;
+  }
+
+  /* --- СЕКЦІЯ 10: Results after YOU JOIN --- */
+  .st10 {
+    width: 100vw;
+    padding: 9.35vw 5.61vw;
+    gap: 5.61vw;
+  }
+  .st10-title-red, .st10-title-black {
+    font-size: 9.35vw;
+    letter-spacing: 0.19vw;
+  }
+  .st10-cards {
+    gap: 5.61vw;
+  }
+  .st10-card {
+    width: 88.79vw;
+    min-height: 24.53vw;
+    border-radius: 2.8vw;
+  }
+  .st10-left, .st10-right {
+    padding: 3.74vw 4.67vw;
+  }
+  .st10-strong, .st10-norm {
+    font-size: 3.74vw;
+  }
+
+  /* --- СЕКЦІЯ 11: WHY THIS PROGRAM WORKS --- */
+  .st11 {
+    width: 100vw;
+    padding: 9.11vw 5.61vw 10.75vw 5.61vw;
+    gap: 7.48vw;
+  }
+  .st11-title-black {
+    font-size: 9.35vw;
+    letter-spacing: 0.19vw;
+  }
+  .st11-icons-row {
+    gap: 3.04vw;
+  }
+  .st11-icon-item {
+    gap: 1.64vw;
+  }
+  .st11-icon-circle {
+    width: 7.48vw;
+    height: 7.48vw;
+    box-shadow: 0vw 0.93vw 0.93vw rgba(0, 0, 0, 0.25);
+    outline-width: 0.23vw;
+  }
+  .st11-icon-label {
+    font-size: 3.27vw;
+  }
+  .st11-steps {
+    gap: 10.05vw;
+    margin-top: 0.93vw;
+  }
+  .st11-step {
+    gap: 3.27vw;
+  }
+  .st11-step-num {
+    width: 16.82vw;
+    font-size: 16.36vw;
+  }
+  .st11-step:nth-child(even) .st11-step-num {
+    width: 19.16vw;
+  }
+  .st11-step-img-wrap {
+    width: 20.09vw;
+    height: 20.33vw;
+    border-radius: 1.87vw;
+    outline-width: 0.23vw;
+    outline-offset: -0.23vw;
+  }
+  .st11-step-title, .st11-step-desc {
+    font-size: 3.74vw;
+    line-height: 5.37vw;
+  }
+
+  /* Глобальний контейнер блоку 12 */
+  .st12 {
+    width: 100vw;
+    padding: 37.38vw 5.61vw 10.51vw 5.61vw;
+  }
+  .pr {
+    font-size: 11.68vw;
+  }
+  .st12-inner-card {
+    box-shadow: 0vw 0vw 3.74vw rgba(0, 0, 0, 0.15);
+    border-radius: 4.67vw;
+    border-width: 0.23vw;
+    padding: 5.61vw;
+  }
+  .st12-title {
+    font-size: 5.84vw;
+    padding-bottom: 4.67vw;
+  }
+  .st12-list {
+    gap: 3.27vw;
+    padding: 3.5vw 0;
+  }
+  .st12-list-item {
+    gap: 2.34vw;
+  }
+  .st12-check-icon {
+    width: 5.14vw;
+    height: 5.14vw;
+  }
+  .st12-list-text {
+    font-size: 3.27vw;
+    line-height: 4.21vw;
+    padding-top: 0.47vw;
+  }
+  .st12-summary-text {
+    font-size: 4.67vw;
+  }
+  .st12-bottom-group {
+    gap: 1.87vw;
+  }
+  .st12-btn {
+    height: 16.82vw;
+    border-radius: 17.29vw;
+    box-shadow: 0vw 0.7vw 2.57vw rgba(0, 0, 0, 0.15);
+    outline-width: 0.35vw;
+    outline-offset: -0.35vw;
+    font-size: 6.31vw;
+    letter-spacing: 0.12vw;
+  }
+  .st12-cancel-text {
+    font-size: 3.27vw;
+    line-height: 4.21vw;
+  }
+
+  .contacts {
+    padding: 1.87vw 5.61vw 65.42vw 5.61vw;
+  }
+  .contacts__title {
+    font-size: 9.35vw;
+    margin: 0 0 8.41vw 0;
+    letter-spacing: -0.12vw;
+  }
+  .contacts__grid {
+    gap: 2.8vw;
+    margin-bottom: 5.84vw;
+  }
+  .contacts__card {
+    width: 27.57vw;
+    height: 28.04vw;
+    box-shadow: inset 0vw 0.47vw 0.93vw 0vw rgba(0, 0, 0, 0.1), inset 0vw -0.47vw 0.93vw 0vw rgba(255, 255, 255, 0.25);
+    border-radius: 7.01vw;
+    border-width: 0.23vw;
+    border-top-width: 0.23vw;
+  }
+  .contacts__icon {
+    margin-bottom: 2.8vw;
+  }
+  .contacts__icon--email {
+    width: 11.21vw;
+  }
+  .contacts__label {
+    font-size: 3.74vw;
+    letter-spacing: 0.05vw;
+  }
+  .contacts__policy {
+    font-size: 3.04vw;
+    margin-bottom: 3.5vw;
+  }
+  .contacts__copyright {
+    font-size: 3.04vw;
+    margin: 0 0 8.41vw 0;
+  }
+  .contacts__payments {
+    margin-left: -0.47vw;
+  }
+
+  /* Футер */
+  .footer-bg {
+    transform: translateY(35.05vw);
+  }
+  .footer {
+    width: 100vw;
+    padding: 5.61vw 5.61vw 9.35vw 5.61vw;
+    box-shadow: 0vw -1.17vw 4.21vw rgba(0, 0, 0, 0.25);
+    border-radius: 7.48vw 7.48vw 0 0;
+  }
+  .footer-timer-title {
+    font-size: 4.67vw;
+    line-height: 4.67vw;
+  }
+  .footer-text-n {
+    font-size: 3.27vw;
+    padding-bottom: 1.17vw;
+    padding-top: 3.5vw;
+  }
+  .timer-display {
+    gap: 1.4vw;
+  }
+  .timer-box {
+    width: 8.88vw;
+    padding: 2.34vw 1.87vw;
+    border-radius: 3.5vw;
+    outline-width: 0.23vw;
+    outline-offset: -0.23vw;
+    font-size: 4.67vw;
+    line-height: 4.67vw;
+  }
+  .footerButton-new {
+    max-width: 88.79vw;
+    padding: 6.07vw 4.67vw 3.97vw 4.67vw;
+    border-radius: 12.62vw;
+    outline-offset: -0.47vw;
+    gap: 2.34vw;
+  }
+  .btn-text-large, .btn-text-small {
+    font-size: 4.44vw;
+    letter-spacing: 0.36vw;
+  }
+  .timer-separator {
+    width: 0.61vw;
+    height: 1.92vw;
+  }
+}
